@@ -1,0 +1,748 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/v1/koodo/document": {
+      "post": {
+        "tags": [
+          "koodo-agreement-document-api-controller"
+        ],
+        "operationId": "createKoodoAgreementDocument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KoodoAgreementDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/koodo/ping": {
+      "get": {
+        "tags": [
+          "koodo-agreement-document-api-controller"
+        ],
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "accountSubType": {
+            "type": "string"
+          },
+          "billingAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "legalBusinessName": {
+            "type": "string"
+          },
+          "tradeName": {
+            "type": "string"
+          },
+          "billingDeliveryMethodCode": {
+            "type": "string"
+          },
+          "homePhoneNumber": {
+            "$ref": "#/components/schemas/ContactPhoneNumber"
+          },
+          "businessPhoneNumber": {
+            "$ref": "#/components/schemas/ContactPhoneNumber"
+          },
+          "subscriberList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subscriber"
+            }
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": "string"
+          },
+          "mulicipalityName": {
+            "type": "string"
+          },
+          "provinceStateCode": {
+            "type": "string"
+          },
+          "postalZipCode": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          }
+        }
+      },
+      "Characteristic": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactPhoneNumber": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          }
+        }
+      },
+      "Contract": {
+        "type": "object",
+        "properties": {
+          "pricePlanCode": {
+            "type": "string"
+          },
+          "pricePlanDescription": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          },
+          "pricePlanRecurringChargeAmount": {
+            "type": "string"
+          },
+          "pricePlanDiscountAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "pricePlanDiscountPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "pricePlanDiscountAppliedMonthsNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recurringChargeAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "flexPlanInd": {
+            "type": "boolean"
+          },
+          "commitmentStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commitmentEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commitmentMonths": {
+            "type": "number",
+            "format": "double"
+          },
+          "e911ChargeAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimumMonthlySpendCommitmentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "featureList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          }
+        }
+      },
+      "CorporateStoreSupplementaryInfo": {
+        "type": "object",
+        "properties": {
+          "posTransactionID": {
+            "type": "string"
+          },
+          "outletProvinceCode": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "Deposit": {
+        "type": "object",
+        "properties": {
+          "depositAmt": {
+            "type": "number",
+            "format": "double"
+          },
+          "depositReasonCode": {
+            "type": "string"
+          },
+          "securityDepositInd": {
+            "type": "boolean"
+          },
+          "depositReasonDescText": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          }
+        }
+      },
+      "Discount": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          }
+        }
+      },
+      "Equipment": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          },
+          "hardwareTypeCode": {
+            "type": "string"
+          },
+          "networkTypeCode": {
+            "type": "string"
+          },
+          "deviceTypeCode": {
+            "type": "string"
+          },
+          "equipmentOwnedInd": {
+            "type": "string"
+          },
+          "appleDeviceInd": {
+            "type": "boolean"
+          },
+          "newSimInd": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Feature": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "$ref": "#/components/schemas/Service"
+          },
+          "mandatoryDataServiceInd": {
+            "type": "boolean"
+          },
+          "serviceEffectiveDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "HandsetTransaction": {
+        "type": "object",
+        "properties": {
+          "newHardwareBalanceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "serviceAgreementDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "msrp": {
+            "type": "number",
+            "format": "double"
+          },
+          "hardwareBalanceOnbillInd": {
+            "type": "boolean"
+          },
+          "hardwareBalancePaymentApprovalNum": {
+            "type": "string"
+          },
+          "repaymentBalanceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "deviceBalanceRepaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "deviceBalanceLoyaltyCredit": {
+            "type": "number",
+            "format": "double"
+          },
+          "easyPaymentBalanceRepaymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "easyPaymentBalanceLoyaltyCreditAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "earlyDeviceUpgradeFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "earlyDeviceUpgradeFeeLoyaltyCredit": {
+            "type": "number",
+            "format": "double"
+          },
+          "handsetDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "airtimeCreditBalance": {
+            "type": "number",
+            "format": "double"
+          },
+          "activationCreditAppliedMonths": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentSupportProgramTypeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentSupportProgramTypeList"
+            }
+          }
+        }
+      },
+      "KoodoAgreementDocument": {
+        "type": "object",
+        "properties": {
+          "contentLanguage": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "channelRef1": {
+            "type": "string"
+          },
+          "channelRef2": {
+            "type": "string"
+          },
+          "outletCD": {
+            "type": "string"
+          },
+          "channelRef3": {
+            "type": "string"
+          },
+          "salesRepPin": {
+            "type": "string"
+          },
+          "channelRef4": {
+            "type": "string"
+          },
+          "outletAssociatedProvince": {
+            "type": "string"
+          },
+          "accountInfo": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "serviceAgreementSupplementaryInfo": {
+            "$ref": "#/components/schemas/ServiceAgreementSupplementaryInfo"
+          },
+          "corporateStoreSupplementaryInfo": {
+            "$ref": "#/components/schemas/CorporateStoreSupplementaryInfo"
+          },
+          "prepaidAccoutBalanceCarryOverAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "characteristic": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Characteristic"
+            }
+          }
+        }
+      },
+      "KoodoAgreementDocumentRequest": {
+        "type": "object",
+        "properties": {
+          "koodoAgreementDocument": {
+            "$ref": "#/components/schemas/KoodoAgreementDocument"
+          }
+        }
+      },
+      "MultilingualCodeDescText": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "type": "string"
+          },
+          "codeDescText": {
+            "type": "string"
+          }
+        }
+      },
+      "Name": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "legalBusinessName": {
+            "type": "string"
+          }
+        }
+      },
+      "PartialTransactionOption": {
+        "type": "object",
+        "properties": {
+          "fulfillmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fulfillmentMethod": {
+            "type": "string"
+          },
+          "partialFulfillmentText": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentSupportProgramTypeList": {
+        "type": "object",
+        "properties": {
+          "programTypeCd": {
+            "type": "string"
+          },
+          "programSubTypeCd": {
+            "type": "string"
+          },
+          "installmentCnt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "programAmt": {
+            "type": "number",
+            "format": "double"
+          },
+          "programEffectiveDt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "programEndDt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "programTermInMonthsNum": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "RenewalInfo": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          },
+          "equipmentReturnRequiredIndicator": {
+            "type": "boolean"
+          },
+          "migrationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "migrationBalance": {
+            "type": "number",
+            "format": "double"
+          },
+          "contractBuyoutAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "depositForwardAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "mtmTransactionType": {
+            "type": "string"
+          },
+          "transactionOnBehalfOfName": {
+            "type": "string"
+          },
+          "partialTransactionOption": {
+            "$ref": "#/components/schemas/PartialTransactionOption"
+          },
+          "termsAndConditionsID": {
+            "type": "string"
+          }
+        }
+      },
+      "RewardAccount": {
+        "type": "object",
+        "properties": {
+          "koodoTabBalanceAmt": {
+            "type": "number",
+            "format": "double"
+          },
+          "koodoTabRedeemedAmt": {
+            "type": "number",
+            "format": "double"
+          },
+          "koodoTabTypeCode": {
+            "type": "string"
+          },
+          "koodoTabMonthlyAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "serviceCode": {
+            "type": "string"
+          },
+          "serviceDescription": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          },
+          "servicePriceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentFrequency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serviceTypeCode": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceAgreementSupplementaryInfo": {
+        "type": "object",
+        "properties": {
+          "serviceAgreementCopies": {
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "string"
+          },
+          "transactionPartyList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionParty"
+            }
+          },
+          "systemId": {
+            "type": "string"
+          },
+          "sourceUI": {
+            "type": "string"
+          },
+          "serviceAgreementDeliveryPreference": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceSupportFee": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "code": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "chargeIndicator": {
+            "type": "boolean"
+          },
+          "creditIndicator": {
+            "type": "boolean"
+          },
+          "creditedIndicator": {
+            "type": "boolean"
+          },
+          "futureDatedIndicator": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MultilingualCodeDescText"
+            }
+          }
+        }
+      },
+      "Subscriber": {
+        "type": "object",
+        "properties": {
+          "subscriberName": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "subAccount": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "salesId": {
+            "type": "string"
+          },
+          "equipmentList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Equipment"
+            }
+          },
+          "mdnMarketProvinceCode": {
+            "type": "string"
+          },
+          "contractStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "contract": {
+            "$ref": "#/components/schemas/Contract"
+          },
+          "dataUnblockAuthorizationInd": {
+            "type": "boolean"
+          },
+          "renewalInfo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RenewalInfo"
+            }
+          },
+          "rewardAccount": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RewardAccount"
+            }
+          },
+          "handsetTransaction": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HandsetTransaction"
+            }
+          },
+          "depositList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deposit"
+            }
+          },
+          "discountList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Discount"
+            }
+          },
+          "serviceSupportFeeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceSupportFee"
+            }
+          }
+        }
+      },
+      "TransactionParty": {
+        "type": "object",
+        "properties": {
+          "transactionPartyRoleCd": {
+            "type": "string"
+          },
+          "transactionPartyName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
